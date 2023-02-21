@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->rememberToken();
+        Schema::create('productDetail', function (Blueprint $table) {
+            $table->foreign('idProduct')->conferences('id')->on('products');
+            $table->foreign('idSize')->conferences('id')->on('sizes');
+            $table->foreign('idColor')->conferences('id')->on('colors');
+            $table->int('quality');
             $table->timestamps();
+            $table->primary(['idProduct', 'idSize', 'idColor']);
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('productDetail');
     }
 };

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admins', function (Blueprint $table) {
+        Schema::create('productReview', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->rememberToken();
+            $table->foreign('idProduct')->conferences('id')->on('products');
+            $table->foreign('idCustomer')->conferences('id')->on('customers');
+            $table->int('star');
+            $table->string('review')->nullable();
+            $table->string('image')->nullable();
+            $table->date('reviewDate');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('productReview');
     }
 };
